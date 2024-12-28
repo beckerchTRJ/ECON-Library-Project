@@ -85,7 +85,9 @@ For a detailed breakdown, check out:
 ---
 
 ## **Acknowledgments**
-This project was developed as part of ECON 460 at [Your Institution]. Thanks to my collaborators and the authors of the datasets:
+This project was developed as part of ECON 460: Economic Applications of Machine Learning at the University of Southern California. Thanks to my collaborators:
+- **Luke Alati**, **Dung Pham**, **Darian Ahmadizadeh**, and **Natasha Densiyuk**   
+And the authors of the datasets:
 - **American Community Survey** (ACS)
 - **Public Libraries Survey** (PLS)
 - **Small Area Income and Poverty Estimates** (SAIPE)
