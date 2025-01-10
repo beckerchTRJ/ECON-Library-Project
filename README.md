@@ -37,6 +37,7 @@ We employed ridge and lasso regression to:
 - **Socioeconomic factors dominate**: Poverty percentage is the strongest negative predictor of graduation rates.
 - **Library access matters**: Central libraries and material circulation show a positive relationship with graduation rates.
 - **Engagement is key**: Borrowing materials is more impactful than simply visiting the library.
+- **Same problem, many reasons**: Under-performing counties may each have unique reasons behind low graduation rates that can be more difficult to model. For example, Lagrange County in Indiana has a high median income and low poverty, but a large percentage of Amish people means graduation rates remain very low.
 - **Disparities remain**: The role of libraries is more significant in underserved communities but is overshadowed by broader socioeconomic challenges.
 
 ---
@@ -52,14 +53,14 @@ We employed ridge and lasso regression to:
 Key predictors and coefficients:
 | Feature                  | Ridge Coefficient | Lasso Coefficient |
 |--------------------------|-------------------|-------------------|
-| Poverty Percentage       | -2.98            | -2.92            |
-| Central Libraries (per capita) | 0.88             | 0.70             |
-| Circulation (per capita) | 0.84             | 0.70             |
+| Poverty Percentage       | -2.68            | -3.00            |
+| Central Libraries (per capita) | 0.86             | 0.64             |
+| Circulation (per capita) | 0.63             | 0.41             |
 
 For a detailed breakdown, check out:
 - 📊 [Visualizations and Outputs](results/)
-- 📄 [Full Paper](paper/library-graduation-paper.pdf)
-
+- 📄 [Full Paper](paper/library-graduation-paper.pdf) 
+- Some results of paper may be outdated based off of refinements to approach
 ---
 
 ## **How to Use This Repository**
