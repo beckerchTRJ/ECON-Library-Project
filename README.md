@@ -58,8 +58,8 @@ Key predictors and coefficients:
 | Circulation (per capita) | 0.63             | 0.41             |
 
 For a detailed breakdown, check out:
-- 📊 [Visualizations and Outputs](results/)
-- 📄 [Full Paper](paper/library-graduation-paper.pdf) 
+- 📊 [Visualizations and Outputs](Results/)
+- 📄 [Full Paper](Paper/library-graduation-paper.pdf) 
 *Some results of paper may be outdated based off of refinements to approach*
 ---
 
@@ -94,6 +94,3 @@ And the authors of the datasets:
 - **Small Area Income and Poverty Estimates** (SAIPE)
 
 ---
-
-## **License**
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
