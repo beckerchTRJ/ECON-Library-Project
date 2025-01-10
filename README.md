@@ -60,7 +60,7 @@ Key predictors and coefficients:
 For a detailed breakdown, check out:
 - 📊 [Visualizations and Outputs](results/)
 - 📄 [Full Paper](paper/library-graduation-paper.pdf) 
-- Some results of paper may be outdated based off of refinements to approach
+*Some results of paper may be outdated based off of refinements to approach*
 ---
 
 ## **How to Use This Repository**
