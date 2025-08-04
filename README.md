@@ -1,5 +1,5 @@
 
-# **Predicting County Graduation Rates Using Library Access and Socioeconomic Data** 📚🎓
+# **Analyzing County Graduation Rates Using Library Access and Socioeconomic Data** 📚🎓
 
 This project explores the relationship between public library access, socioeconomic factors, and high school graduation rates across U.S. counties. Using ridge and lasso regression, we identify key predictors that highlight the importance of library resources and socioeconomic conditions in driving educational outcomes.
 
