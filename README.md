@@ -1,96 +1,72 @@
+# Do Public Libraries Move High School Graduation Rates?
 
-# **Analyzing County Graduation Rates Using Library Access and Socioeconomic Data** 📚🎓
+**Question:** after accounting for poverty and income, does public library access still predict county graduation rates?
+**Approach:** ridge and lasso regression on 3,218 U.S. counties, combining Census, library-survey, and poverty data.
+**Result:** poverty dominates, but library access survives regularization — **central libraries and circulation per capita are the strongest positive predictors**, and borrowing matters more than visiting. The models cut test error by roughly **39%** against a predict-the-mean benchmark (15.8 vs. 25.7).
 
-This project explores the relationship between public library access, socioeconomic factors, and high school graduation rates across U.S. counties. Using ridge and lasso regression, we identify key predictors that highlight the importance of library resources and socioeconomic conditions in driving educational outcomes.
+📄 [Full paper](Paper/library-graduation-paper.pdf) · 📓 [Notebook](Notebooks/econ_460.ipynb) · 📊 [Interactive maps and charts](Results/)
 
----
-
-## **Motivation**
-Achieving a high school diploma is a critical milestone that significantly impacts long-term economic outcomes and community well-being. Public libraries, as hubs of free educational resources, play an important role in bridging gaps in resource access for underserved communities. This project investigates:
-- **How do public libraries influence high school graduation rates?**
-- **What role do socioeconomic factors play in this relationship?**
+![Ridge and lasso coefficients across all, top-performing, and bottom-performing counties](Results/feature_weights_comparison.png)
 
 ---
 
-## **Data**
-We analyzed county-level data from multiple sources:
-- **Graduation Rates**: American Community Survey (ACS, 2022).
-- **Library Metrics**: Public Libraries Survey (PLS, 2022).
-- **Socioeconomic Data**: Small Area Income and Poverty Estimates (SAIPE, 2022).
+## Motivation
 
-Key features include:
-- **Graduation rate**: High school graduation percentage by county.
-- **Library access**: Metrics such as visits, circulation, and staffing per capita.
-- **Socioeconomic indicators**: Poverty rate, median income, and income range.
+A high school diploma shapes long-run earnings and community well-being. Public libraries are one of the few free educational resources available everywhere, including in underserved communities. This project asks:
 
----
+- How strongly is public library access associated with graduation rates?
+- How much of that relationship is really just socioeconomics?
 
-## **Methodology**
-We employed ridge and lasso regression to:
-1. Identify the most relevant predictors of graduation rates.
-2. Analyze patterns across all counties, top-performing counties, and bottom-performing counties.
-3. Use regularization to handle multicollinearity and prevent overfitting.
+## Data
 
----
+County-level data for 2022, merged from three sources:
 
-## **Key Findings**
-- **Socioeconomic factors dominate**: Poverty percentage is the strongest negative predictor of graduation rates.
-- **Library access matters**: Central libraries and material circulation show a positive relationship with graduation rates.
-- **Engagement is key**: Borrowing materials is more impactful than simply visiting the library.
-- **Same problem, many reasons**: Under-performing counties may each have unique reasons behind low graduation rates that can be more difficult to model. For example, Lagrange County in Indiana has a high median income and low poverty, but a large percentage of Amish people means graduation rates remain very low.
-- **Disparities remain**: The role of libraries is more significant in underserved communities but is overshadowed by broader socioeconomic challenges.
+| Source | What it provides |
+|---|---|
+| American Community Survey (ACS) | High school graduation rate by county |
+| Public Libraries Survey (PLS) | Visits, circulation, staffing, central and branch libraries — all per capita |
+| Small Area Income and Poverty Estimates (SAIPE) | Poverty rate, median income, income range |
 
----
+## Method
 
-## **Project Highlights**
-- **Data Analysis**: Aggregated and cleaned data across multiple sources for 3,218 U.S. counties.
-- **Modeling**: Applied ridge and lasso regression with 20-fold cross-validation for optimal regularization.
-- **Insights for Policymakers**: Highlighted the potential impact of increased library funding and targeted socioeconomic interventions.
+1. Aggregate and clean the three sources into one table of 3,218 counties.
+2. Fit ridge and lasso regressions, choosing the regularization strength with 20-fold cross-validation. Regularization handles the heavy multicollinearity among library metrics and guards against overfitting.
+3. Fit separately on **all counties**, the **top-performing** counties, and the **bottom-performing** counties to see whether the same factors matter across the distribution.
+4. Compare against a predict-the-mean benchmark.
 
----
+## Findings
 
-## **Results**
-Key predictors and coefficients:
-| Feature                  | Ridge Coefficient | Lasso Coefficient |
-|--------------------------|-------------------|-------------------|
-| Poverty Percentage       | -2.68            | -3.00            |
-| Central Libraries (per capita) | 0.86             | 0.64             |
-| Circulation (per capita) | 0.63             | 0.41             |
+| Feature | Ridge | Lasso |
+|---|---|---|
+| Poverty percentage | −2.68 | −3.00 |
+| Central libraries (per capita) | 0.86 | 0.64 |
+| Circulation (per capita) | 0.63 | 0.41 |
 
-For a detailed breakdown, check out:
-- 📊 [Visualizations and Outputs](Results/)
-- 📄 [Full Paper](Paper/library-graduation-paper.pdf) 
-*Some results of paper may be outdated based off of refinements to approach*
----
+- **Socioeconomic factors dominate.** Poverty percentage is by far the strongest predictor, and it is negative.
+- **Library access still matters.** Central libraries and circulation keep positive weights under lasso, which zeroes out most other library metrics.
+- **Engagement beats foot traffic.** Circulation is positive; visits per capita is not.
+- **The bottom is hard to model.** For the lowest-performing counties the models do no better than the benchmark on test data — low graduation rates have idiosyncratic local causes. LaGrange County, Indiana has high median income and low poverty, but a large Amish population keeps graduation rates very low.
 
-## **How to Use This Repository**
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/beckerchTRJ/library-graduation-prediction.git
-   cd library-graduation-prediction
-   ```
-2. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Run the Notebook**:
-   Navigate to the `notebooks/` folder and open the Jupyter Notebook to explore the analysis.
+![Train and test error for lasso, ridge, and the mean benchmark](Results/train_test_errors_comparison.png)
 
----
+## Limitations
 
-## **Future Directions**
-- Investigate **non-linear models** (e.g., decision trees or random forests).
-- Incorporate **time-series data** to capture long-term library impacts.
-- Study the influence of **school and private libraries** on educational outcomes.
+- These are **associations, not causal estimates** — library investment and graduation rates may share unobserved causes.
+- One cross-section (2022); no time dimension.
+- Linear models only. Tree-based models and school/private library data are natural extensions.
+- The paper reflects an earlier iteration of the analysis; where numbers differ, the notebook is current.
 
----
+## Run it
 
-## **Acknowledgments**
-This project was developed as part of ECON 460: Economic Applications of Machine Learning at the University of Southern California. Thanks to my collaborators:
-- **Luke Alati**, **Dung Pham**, **Darian Ahmadizadeh**, and **Natasha Densiyuk**   
-And the authors of the datasets:
-- **American Community Survey** (ACS)
-- **Public Libraries Survey** (PLS)
-- **Small Area Income and Poverty Estimates** (SAIPE)
+```bash
+git clone https://github.com/beckerchTRJ/ECON-Library-Project.git
+cd ECON-Library-Project
+pip install -r requirements.txt
+jupyter notebook Notebooks/econ_460.ipynb
+```
 
----
+The interactive Plotly outputs in `Results/` are HTML files — download and open them in a browser.
+
+## Credits
+
+Developed for ECON 460: Economic Applications of Machine Learning at the University of Southern California, with Luke Alati, Dung Pham, Darian Ahmadizadeh, and Natasha Densiyuk. Data from the ACS, PLS, and SAIPE programs.
