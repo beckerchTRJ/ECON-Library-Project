@@ -8,6 +8,8 @@
 
 ![Ridge and lasso coefficients across all, top-performing, and bottom-performing counties](Results/feature_weights_comparison.png)
 
+**In plain terms:** counties where people borrow more from public libraries tend to have higher high school graduation rates, even after accounting for how poor or wealthy the county is. Poverty still matters far more than anything else. The statistical methods used here (ridge and lasso regression) are designed to push unimportant factors toward zero, so the factors that remain are the ones the data really supports. This shows a pattern, not proof that libraries cause higher graduation rates.
+
 ---
 
 ## Motivation
